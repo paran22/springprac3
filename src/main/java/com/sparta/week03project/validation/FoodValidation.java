@@ -11,6 +11,9 @@ public class FoodValidation {
         if(foodDto.getPrice() < 100 || foodDto.getPrice() > 1000000) {
             throw new IllegalArgumentException("가격은 100원 ~ 1,000,000원 사이로 입력하세요.");
         }
+        if(foodDto.getPrice() % 100 != 0) {
+            throw new IllegalArgumentException("가격은 100원 단위로 입력하세요.");
+        }
 
     }
 }

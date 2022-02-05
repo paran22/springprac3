@@ -1,6 +1,6 @@
 package com.sparta.week03project.controller;
 
-import com.sparta.week03project.dto.OrderFoodDto;
+import com.sparta.week03project.dto.OrderDto;
 import com.sparta.week03project.dto.OrderResponseDto;
 import com.sparta.week03project.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +19,8 @@ public class OrderController {
 
     // 주문
     @PostMapping("/order/request")
-    public OrderResponseDto addOrder(@RequestBody OrderFoodDto orderFoodDto){
-
-        OrderResponseDto orderResponseDto = orderService.addOrder(orderFoodDto);
+    public OrderResponseDto addOrder(@RequestBody OrderDto orderDto){
+        OrderResponseDto orderResponseDto = orderService.addOrder(orderDto);
         return orderResponseDto;
     }
 

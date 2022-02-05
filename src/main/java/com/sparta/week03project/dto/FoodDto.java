@@ -1,7 +1,6 @@
 package com.sparta.week03project.dto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 
 @Getter

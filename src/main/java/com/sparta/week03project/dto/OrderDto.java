@@ -1,11 +1,12 @@
 package com.sparta.week03project.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
-public class OrderFoodDto {
+public class OrderDto {
     private Long restaurantId;
     private List<Foods> foods;
 

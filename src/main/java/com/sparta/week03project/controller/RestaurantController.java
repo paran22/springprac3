@@ -20,9 +20,9 @@ public class RestaurantController {
 //    @PostMapping(value = "/restaurant/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     //음식점 등록
     @PostMapping("/restaurant/register")
-    public Long postRestaurant(@RequestBody RestaurantDto restaurantDto) throws IllegalArgumentException {
+    public Restaurant postRestaurant(@RequestBody RestaurantDto restaurantDto) throws IllegalArgumentException {
         Restaurant restaurant = restaurantService.addRestaurant(restaurantDto);
-        return restaurant.getId();
+        return restaurant;
     }
 
     //음식점 조회

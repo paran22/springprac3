@@ -6,6 +6,7 @@ import com.sparta.week03project.service.FoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -16,11 +17,10 @@ public class FoodController {
 
     //음식 등록
     @PostMapping("/restaurant/{restaurantId}/food/register")
-    public Long addFood(@PathVariable Long restaurantId,
-                        @RequestBody FoodDto foodDto
+    public void addFood(@PathVariable Long restaurantId,
+                        @RequestBody List<FoodDto> foodDtoList
     ) {
-        Food food = foodService.addFood(restaurantId, foodDto);
-        return food.getId();
+        foodService.addFood(restaurantId, foodDtoList);
     }
 
     //메뉴판 조회

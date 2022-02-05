@@ -8,14 +8,14 @@ import java.util.List;
 @Getter
 public class OrderResponseDto {
     private String restaurantName;
-    private List<OrderFood> orderFoodList;
+    private List<OrderFood> foods;
     private Long deliveryFee;
     private Long totalPrice;
 
     public OrderResponseDto(String restaurantName, List<OrderFood> orderFoodList,
                             Long deliveryFee, Long totalPrice) {
         this.restaurantName = restaurantName;
-        this.orderFoodList = orderFoodList;
+        this.foods = orderFoodList;
         this.deliveryFee = deliveryFee;
         this.totalPrice = totalPrice;
     }

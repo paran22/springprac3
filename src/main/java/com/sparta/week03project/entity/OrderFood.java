@@ -1,5 +1,6 @@
 package com.sparta.week03project.entity;
 
+import com.sparta.week03project.validation.OrderFoodValidation;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +32,8 @@ public class OrderFood {
 
 
     public OrderFood(String foodName, Long quantity, Long foodPrice) {
+
+        OrderFoodValidation.validationOrderFoodInput(quantity);
         this.name = foodName;
         this.quantity = quantity;
         this.price = quantity * foodPrice;

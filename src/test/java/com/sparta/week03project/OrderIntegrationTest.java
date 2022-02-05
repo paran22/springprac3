@@ -6,10 +6,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.*;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -212,6 +215,7 @@ class OrderIntegrationTest {
 
         // 음식 주문 확인
         assertEquals(3, orderDto.foods.size());
+
         // 음식1 주문 확인
         FoodOrderDto foodOrder1 = orderDto.foods.stream()
                 .filter(foodOrderDto -> foodOrderDto.name.equals(food1.getName()))

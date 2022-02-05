@@ -27,7 +27,7 @@ public class Order {
 
     @JsonIgnore
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderFood> orderFoodList = new ArrayList<>();
+    private List<OrderFood> foods = new ArrayList<>();
 
     @Column(nullable = false)
     private Long totalPrice;
@@ -39,9 +39,9 @@ public class Order {
         restaurant.getOrderList().add(this);
     }
 
-    public void addOrderFoodList(List<OrderFood> orderFoodList, Long totalPrice) {
-        this.orderFoodList = orderFoodList;
-        for (OrderFood orderFood : orderFoodList) {
+    public void addOrderFoodList(List<OrderFood> foods, Long totalPrice) {
+        this.foods = foods;
+        for (OrderFood orderFood : foods) {
             orderFood.setOrder(this);
         }
         this.totalPrice = totalPrice;
@@ -51,10 +51,10 @@ public class Order {
     //생성 메소드
 
     public static Order addOrder(Restaurant restaurant,
-                                 List<OrderFood> orderFoodList, Long totalPrice) {
+                                 List<OrderFood> foods, Long totalPrice) {
         Order order = new Order();
         order.setOrderRestaurant(restaurant);
-        order.addOrderFoodList(orderFoodList, totalPrice);
+        order.addOrderFoodList(foods, totalPrice);
 
         return order;
     }
