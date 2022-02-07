@@ -19,4 +19,16 @@ public class RestApiExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
+
+    @ExceptionHandler(value = { NullPointerException.class })
+    public ResponseEntity<Object> handleApiRequestException(NullPointerException ex) {
+        RestApiException restApiException = new RestApiException();
+        restApiException.setHttpStatus(HttpStatus.BAD_REQUEST);
+        restApiException.setErrorMessage(ex.getMessage());
+
+        return new ResponseEntity(
+                restApiException,
+                HttpStatus.BAD_REQUEST
+        );
+    }
 }

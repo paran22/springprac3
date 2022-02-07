@@ -7,6 +7,7 @@ import com.sparta.week03project.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,20 +27,16 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
+    @Transactional
     public OrderResponseDto addOrder(OrderDto orderDto) {
-
         //주문 식당 찾기
         Restaurant restaurant = restaurantRepository.findById(orderDto.getRestaurantId())
                 .orElseThrow(() -> new NullPointerException("해당 음식점이 존재하지 않습니다."));
 
         //주문 음식 List 생성
         List<OrderFood> orderFoodList = new ArrayList<>();
-        for (int i = 0; i < orderDto.getFoods().size(); i++) {
-            OrderDto.Foods foods = orderDto.getFoods().get(i);
-            Food food = foodRepository.findById(foods.getId())
-                    .orElseThrow(() -> new NullPointerException("해당 음식이 존재하지 않습니다."));
-            OrderFood orderFood = new OrderFood(
-                    food.getName(), foods.getQuantity(), food.getPrice());
+        for (OrderDto.Foods foods : orderDto.getFoods()) {
+            OrderFood orderFood = createOrderFood(foods);
             orderFoodList.add(orderFood);
         }
         //주문 음식 List 저장
@@ -61,13 +58,20 @@ public class OrderService {
         Order order = Order.addOrder(restaurant, orderFoodList, totalPrice);
         orderRepository.save(order);
 
-        OrderResponseDto orderResponseDto = new OrderResponseDto(
+        return new OrderResponseDto(
                 order.getOrderRestaurant().getName(),
                 order.getFoods(), deliveryFee, totalPrice);
 
-        return orderResponseDto;
-
     }
+
+    // 주문 음식을 Food에서 찾아서 필요한 정보들을 OrderFood에 입력해주는 메소드
+    private OrderFood createOrderFood(OrderDto.Foods foods) {
+        Food food = foodRepository.findById(foods.getId())
+                .orElseThrow(() -> new NullPointerException("해당 음식이 존재하지 않습니다."));
+        return new OrderFood(
+                food.getName(), foods.getQuantity(), food.getPrice());
+    }
+
 
     public List<OrderResponseDto> getOrderList() {
         List<Order> orderList = orderRepository.findAll();
