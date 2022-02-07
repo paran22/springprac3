@@ -25,5 +25,14 @@ public class RestaurantValidation {
         if(restaurantDto.getDeliveryFee() % 500 != 0) {
             throw new IllegalArgumentException("500원 단위로 입력해주세요");
         }
+
+        // 배달 가능 거리 x, y 유효성 검사
+        if(restaurantDto.getX() < 0 || restaurantDto.getX() > 99) {
+            throw new IllegalArgumentException("0~99 사이로 입력해주세요");
+        }
+
+        if(restaurantDto.getY() < 0 || restaurantDto.getY() > 99) {
+            throw new IllegalArgumentException("0~99 사이로 입력해주세요");
+        }
     }
 }

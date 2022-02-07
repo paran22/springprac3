@@ -6,6 +6,7 @@ import com.sparta.week03project.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,9 +27,16 @@ public class RestaurantService {
         return restaurant;
     }
 
-    //음식점 조회
-    public List<Restaurant> getRestaurantList() {
-        List<Restaurant> restaurantList = restaurantRepository.findAll();
+    //배달 가능한 음식점 조회
+    public List<Restaurant> getRestaurantList(Long x, Long y) {
+        List<Restaurant> restaurantListAll = restaurantRepository.findAll();
+        List<Restaurant> restaurantList = new ArrayList<>();
+        // 3 이내의 음식점만 리스트에 추가
+        for (Restaurant restaurant : restaurantListAll) {
+            if(Math.abs(restaurant.getX() - x) + Math.abs(restaurant.getY() - y) <= 3) {
+                restaurantList.add(restaurant);
+            }
+        }
         return restaurantList;
     }
 

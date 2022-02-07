@@ -17,19 +17,16 @@ public class RestaurantController {
 
     private final RestaurantService restaurantService;
 
-//    @PostMapping(value = "/restaurant/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     //음식점 등록
     @PostMapping("/restaurant/register")
-    public Restaurant postRestaurant(@RequestBody RestaurantDto restaurantDto) throws IllegalArgumentException {
-        Restaurant restaurant = restaurantService.addRestaurant(restaurantDto);
-        return restaurant;
+    public Restaurant postRestaurant(@RequestBody RestaurantDto restaurantDto) {
+        return restaurantService.addRestaurant(restaurantDto);
     }
 
-    //음식점 조회
+    //배달 가능한 음식점 조회(3 이내)
     @GetMapping("/restaurants")
-    public List<Restaurant> getRestaurantList() {
-        List<Restaurant> restaurantList = restaurantService.getRestaurantList();
-        return restaurantList;
+    public List<Restaurant> getRestaurantList(@RequestParam Long x, @RequestParam Long y) {
+        return restaurantService.getRestaurantList(x, y);
     }
 
 }

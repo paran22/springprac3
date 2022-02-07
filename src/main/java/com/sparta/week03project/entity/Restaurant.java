@@ -31,6 +31,12 @@ public class Restaurant {
     @Column(nullable = false)
     private Long deliveryFee;
 
+    @Column(nullable = false)
+    private Long x;
+
+    @Column(nullable = false)
+    private Long y;
+
     @JsonIgnore
     @OneToMany(mappedBy = "restaurant")
     private List<Food> foodList = new ArrayList<>();
@@ -46,6 +52,8 @@ public class Restaurant {
         this.name = restaurantDto.getName();
         this.minOrderPrice = restaurantDto.getMinOrderPrice();
         this.deliveryFee = restaurantDto.getDeliveryFee();
+        this.x = restaurantDto.getX();
+        this.y = restaurantDto.getY();
     }
 
 

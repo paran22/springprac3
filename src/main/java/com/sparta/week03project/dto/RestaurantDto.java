@@ -8,5 +8,8 @@ public class RestaurantDto {
     private String name;
     private Long minOrderPrice;
     private Long deliveryFee;
+    private Long x;
+    private Long y;
+
 
 }

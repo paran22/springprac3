@@ -6,7 +6,6 @@ import com.sparta.week03project.service.FoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
