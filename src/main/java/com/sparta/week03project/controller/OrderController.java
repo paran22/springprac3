@@ -20,8 +20,7 @@ public class OrderController {
     // 주문
     @PostMapping("/order/request")
     public OrderResponseDto addOrder(@RequestBody OrderDto orderDto){
-        OrderResponseDto orderResponseDto = orderService.addOrder(orderDto);
-        return orderResponseDto;
+        return orderService.addOrder(orderDto);
     }
 
     // 주문 조회

@@ -8,6 +8,8 @@ import java.util.List;
 @Getter
 public class OrderDto {
     private Long restaurantId;
+    private Long x;
+    private Long y;
     private List<Foods> foods;
 
     @Getter

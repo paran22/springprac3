@@ -52,7 +52,11 @@ public class OrderService {
             throw new IllegalArgumentException("주문 금액이 최소 주문 가격을 넘지 않습니다.");
         }
         Long deliveryFee = restaurant.getDeliveryFee();
-        Long totalPrice = sumPrice + deliveryFee;
+        //거리 1당 500원씩 배달비 할증 추가
+        Long deliveryFeePlus =
+                (Math.abs(restaurant.getX() - orderDto.getX())
+                + Math.abs(restaurant.getY()) - orderDto.getY()) * 500;
+        Long totalPrice = sumPrice + deliveryFee + deliveryFeePlus;
 
         //주문 저장
         Order order = Order.addOrder(restaurant, orderFoodList, totalPrice);
