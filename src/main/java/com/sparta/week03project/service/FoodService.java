@@ -5,18 +5,27 @@ import com.sparta.week03project.entity.Food;
 import com.sparta.week03project.entity.Restaurant;
 import com.sparta.week03project.repository.FoodRepository;
 import com.sparta.week03project.repository.RestaurantRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @Service
 public class FoodService {
 
     private final FoodRepository foodRepository;
     private final RestaurantRepository restaurantRepository;
+
+    @Autowired
+    public FoodService(
+            FoodRepository foodRepository,
+            RestaurantRepository restaurantRepository) {
+        this.foodRepository = foodRepository;
+        this.restaurantRepository = restaurantRepository;
+    }
+
 
     public void addFood(Long restaurantId, List<FoodDto> foodDtoList) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
@@ -30,6 +39,7 @@ public class FoodService {
                 }
             }
         }
+
         //name 중복검사(기존 입력값)
         List<Food> foodList = new ArrayList<>();
         List<Food> savedFoodList = restaurant.getFoodList();

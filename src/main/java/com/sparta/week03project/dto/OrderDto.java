@@ -15,6 +15,5 @@ public class OrderDto {
         private Long id;
         private Long quantity;
     }
-
 }
 

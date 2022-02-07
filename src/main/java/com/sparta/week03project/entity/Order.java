@@ -32,7 +32,6 @@ public class Order {
     @Column(nullable = false)
     private Long totalPrice;
 
-
     //연관관계 메소드
     public void setOrderRestaurant(Restaurant restaurant) {
         this.orderRestaurant = restaurant;
@@ -47,7 +46,6 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-
     //생성 메소드
 
     public static Order addOrder(Restaurant restaurant,
@@ -58,17 +56,5 @@ public class Order {
 
         return order;
     }
-
-
-    //전체 주문가격 조회
-//   public Long getTotalPrice() {
-//        Long foodPrice = 0L;
-//        Long totalPrice = 0L;
-//        for (OrderFood orderFood: orderFoodList) {
-//            foodPrice += orderFood.getPrice();
-//        }
-//        totalPrice = foodPrice + orderRestaurant.getDeliveryFee();
-//        return totalPrice;
-//    }
 
 }

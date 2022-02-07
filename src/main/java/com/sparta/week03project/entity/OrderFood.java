@@ -30,7 +30,6 @@ public class OrderFood {
     @JoinColumn(name = "order_id")
     private Order order;
 
-
     public OrderFood(String foodName, Long quantity, Long foodPrice) {
 
         OrderFoodValidation.validationOrderFoodInput(quantity);

@@ -4,13 +4,12 @@ import com.sparta.week03project.dto.OrderDto;
 import com.sparta.week03project.dto.OrderResponseDto;
 import com.sparta.week03project.entity.*;
 import com.sparta.week03project.repository.*;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
 public class OrderService {
 
@@ -18,6 +17,14 @@ public class OrderService {
     private final FoodRepository foodRepository;
     private final OrderFoodRepository orderFoodRepository;
     private final OrderRepository orderRepository;
+
+    @Autowired
+    public OrderService(RestaurantRepository restaurantRepository, FoodRepository foodRepository, OrderFoodRepository orderFoodRepository, OrderRepository orderRepository) {
+        this.restaurantRepository = restaurantRepository;
+        this.foodRepository = foodRepository;
+        this.orderFoodRepository = orderFoodRepository;
+        this.orderRepository = orderRepository;
+    }
 
     public OrderResponseDto addOrder(OrderDto orderDto) {
 

@@ -19,7 +19,7 @@ public class Restaurant {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "restrant_id")
+    @Column(name = "restaurant_id")
     private Long id;
 
     @Column(nullable = false)
