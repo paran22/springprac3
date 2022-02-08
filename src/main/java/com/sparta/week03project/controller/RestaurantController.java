@@ -2,11 +2,10 @@ package com.sparta.week03project.controller;
 
 import com.sparta.week03project.dto.RestaurantDto;
 import com.sparta.week03project.entity.Restaurant;
+import com.sparta.week03project.entity.UserRoleEnum;
 import com.sparta.week03project.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +17,7 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     //음식점 등록
+    @Secured(UserRoleEnum.Authority.ADMIN)
     @PostMapping("/restaurant/register")
     public Restaurant postRestaurant(@RequestBody RestaurantDto restaurantDto) {
         return restaurantService.addRestaurant(restaurantDto);
