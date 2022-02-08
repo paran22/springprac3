@@ -28,7 +28,6 @@ public class FoodController {
     //메뉴판 조회
     @GetMapping("/restaurant/{restaurantId}/foods")
     public List<Food> getFoodList(@PathVariable Long restaurantId){
-        List<Food> foodList = foodService.getFoodList(restaurantId);
-        return foodList;
+        return foodService.getFoodList(restaurantId);
     }
 }

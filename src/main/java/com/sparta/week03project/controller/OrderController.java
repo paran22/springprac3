@@ -2,10 +2,8 @@ package com.sparta.week03project.controller;
 
 import com.sparta.week03project.dto.OrderDto;
 import com.sparta.week03project.dto.OrderResponseDto;
-import com.sparta.week03project.entity.UserRoleEnum;
 import com.sparta.week03project.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +26,6 @@ public class OrderController {
     // 주문 조회
     @GetMapping("/orders")
     public List<OrderResponseDto> getOrders() {
-        List<OrderResponseDto> orderResponseDtoList = orderService.getOrderList();
-        return orderResponseDtoList;
+        return orderService.getOrderList();
     }
 }
