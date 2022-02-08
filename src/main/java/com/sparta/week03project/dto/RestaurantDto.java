@@ -12,4 +12,7 @@ public class RestaurantDto {
     private Long y;
 
 
+    //테스트에서 사용
+    public RestaurantDto(String name, Long minOrderPrice, Long deliveryFee, Long x, Long y) {
+    }
 }

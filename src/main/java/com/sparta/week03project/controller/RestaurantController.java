@@ -17,13 +17,14 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     //음식점 등록
-//    @Secured(UserRoleEnum.Authority.ADMIN)
+    @Secured(UserRoleEnum.Authority.ADMIN)
     @PostMapping("/restaurant/register")
     public Restaurant postRestaurant(@RequestBody RestaurantDto restaurantDto) {
         return restaurantService.addRestaurant(restaurantDto);
     }
 
     //배달 가능한 음식점 조회(3 이내)
+    @Secured(UserRoleEnum.Authority.USER)
     @GetMapping("/restaurants")
     public List<Restaurant> getRestaurantList(@RequestParam Long x, @RequestParam Long y) {
         return restaurantService.getRestaurantList(x, y);

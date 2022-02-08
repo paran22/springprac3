@@ -54,7 +54,6 @@ class RestaurantIntegrationTest {
 
             // when
 
-
             ResponseEntity<RestaurantDto> response = restTemplate.postForEntity(
                     "/restaurant/register",
                     request,
