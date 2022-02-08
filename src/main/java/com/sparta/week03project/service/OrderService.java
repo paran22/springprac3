@@ -33,16 +33,22 @@ public class OrderService {
         Restaurant restaurant = restaurantRepository.findById(orderDto.getRestaurantId())
                 .orElseThrow(() -> new NullPointerException("해당 음식점이 존재하지 않습니다."));
 
-        //주문 음식 List 생성
-        List<OrderFood> orderFoodList = new ArrayList<>();
-        for (OrderDto.Foods foods : orderDto.getFoods()) {
-            OrderFood orderFood = createOrderFood(foods);
-            orderFoodList.add(orderFood);
-        }
-        //주문 음식 List 저장
-        orderFoodRepository.saveAll(orderFoodList);
+        // OrderFood 생성 및 저장
+        List<OrderFood> orderFoodList = saveOrderFood(orderDto);
 
         //음식금액총합(sumPrice), 최종결제금액(totalPrice) 계산
+        Long totalPrice = calculatePrice(restaurant, orderFoodList, orderDto);
+
+        //주문 저장
+        Order order = Order.addOrder(restaurant, orderFoodList, totalPrice);
+        orderRepository.save(order);
+
+        return new OrderResponseDto(
+                order.getOrderRestaurant().getName(),
+                order.getFoods(), restaurant.getDeliveryFee(), totalPrice);
+    }
+
+    private Long calculatePrice(Restaurant restaurant, List<OrderFood> orderFoodList, OrderDto orderDto) {
         Long sumPrice = 0L;
         for (OrderFood orderfood : orderFoodList) {
             sumPrice += orderfood.getPrice();
@@ -55,17 +61,21 @@ public class OrderService {
         //거리 1당 500원씩 배달비 할증 추가
         Long deliveryFeePlus =
                 (Math.abs(restaurant.getX() - orderDto.getX())
-                + Math.abs(restaurant.getY()) - orderDto.getY()) * 500;
-        Long totalPrice = sumPrice + deliveryFee + deliveryFeePlus;
+                        + Math.abs(restaurant.getY()) - orderDto.getY()) * 500;
+        return sumPrice + deliveryFee + deliveryFeePlus;
+    }
 
-        //주문 저장
-        Order order = Order.addOrder(restaurant, orderFoodList, totalPrice);
-        orderRepository.save(order);
+    private List<OrderFood> saveOrderFood(OrderDto orderDto) {
+        //주문 음식 List 생성
+        List<OrderFood> orderFoodList = new ArrayList<>();
+        for (OrderDto.Foods foods : orderDto.getFoods()) {
+            OrderFood orderFood = createOrderFood(foods);
+            orderFoodList.add(orderFood);
+        }
+        //주문 음식 List 저장
+        orderFoodRepository.saveAll(orderFoodList);
 
-        return new OrderResponseDto(
-                order.getOrderRestaurant().getName(),
-                order.getFoods(), deliveryFee, totalPrice);
-
+        return orderFoodList;
     }
 
     // 주문 음식을 Food에서 찾아서 필요한 정보들을 OrderFood에 입력해주는 메소드

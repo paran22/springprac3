@@ -17,7 +17,7 @@ public class FoodController {
     private final FoodService foodService;
 
     //음식 등록
-    @Secured(UserRoleEnum.Authority.ADMIN)
+//    @Secured(UserRoleEnum.Authority.ADMIN)
     @PostMapping("/restaurant/{restaurantId}/food/register")
     public void addFood(@PathVariable Long restaurantId,
                         @RequestBody List<FoodDto> foodDtoList

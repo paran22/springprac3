@@ -72,7 +72,6 @@ public class FoodService {
 //        List<Food> foodList = foodRepository.findAllByRestaurantId(restaurantId);
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new NullPointerException("해당 음식점이 존재하지 않습니다."));
-        List<Food> foodList = restaurant.getFoodList();
-        return foodList;
+        return restaurant.getFoodList();
     }
 }

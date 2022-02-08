@@ -17,7 +17,7 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     //음식점 등록
-    @Secured(UserRoleEnum.Authority.ADMIN)
+//    @Secured(UserRoleEnum.Authority.ADMIN)
     @PostMapping("/restaurant/register")
     public Restaurant postRestaurant(@RequestBody RestaurantDto restaurantDto) {
         return restaurantService.addRestaurant(restaurantDto);
