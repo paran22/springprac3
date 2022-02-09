@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Getter
 public class OrderDto {
     private Long restaurantId;
@@ -12,6 +13,7 @@ public class OrderDto {
     private Long y;
     private List<Foods> foods;
 
+    @AllArgsConstructor
     @Getter
     public static class Foods {
         private Long id;

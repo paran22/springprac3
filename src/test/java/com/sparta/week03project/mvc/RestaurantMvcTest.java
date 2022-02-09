@@ -93,6 +93,11 @@ public class RestaurantMvcTest {
                     .andExpect(status().isForbidden())
                     .andDo(print());
         }
+    }
+
+    @Nested
+    @DisplayName("음식점 조회")
+    class GetRestaurant {
 
         @Test
         @WithMockUser(roles = "ADMIN")

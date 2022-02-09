@@ -1,4 +1,4 @@
-package com.sparta.week03project;
+package com.sparta.week03project.integrationTest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
