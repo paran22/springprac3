@@ -1,8 +1,9 @@
 package com.sparta.week03project.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
+@AllArgsConstructor
 @Getter
 public class RestaurantDto {
     private String name;
@@ -12,7 +13,4 @@ public class RestaurantDto {
     private Long y;
 
 
-    //테스트에서 사용
-    public RestaurantDto(String name, Long minOrderPrice, Long deliveryFee, Long x, Long y) {
-    }
 }
