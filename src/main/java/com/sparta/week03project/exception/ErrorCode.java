@@ -18,6 +18,8 @@ public enum ErrorCode {
     TYPE_ERROR_FOOD_PRICE(HttpStatus.BAD_REQUEST, "400_9", "가격은 100원 단위로 입력하세요."),
     INVALID_ORDER_PRICE(HttpStatus.BAD_REQUEST, "400_10", "주문 금액이 최소 주문 가격을 넘지 않습니다."),
     INVALID_ORDER_QUANTITY(HttpStatus.BAD_REQUEST, "400_11", "1~100 사이로 입력해주세요."),
+    DUPLICATE_USER_NAME(HttpStatus.BAD_REQUEST, "400_12", "중복된 사용자 ID 가 존재합니다."),
+    INVALID_ADMIN_TOKEN(HttpStatus.BAD_REQUEST, "400_13", "관리자 암호가 틀려 등록이 불가능합니다."),
 
     // 403 Forbidden
     NOT_ALLOWED(HttpStatus.FORBIDDEN, "403", "인가되지 않은 페이지입니다."),
