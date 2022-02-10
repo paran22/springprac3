@@ -1,5 +1,6 @@
 package com.sparta.week03project.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity // 스프링 Security 지원을 가능하게 함
 @EnableGlobalMethodSecurity(securedEnabled = true) // @Secured 어노테이션 활성화
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Bean
     public BCryptPasswordEncoder encodePassword() {
@@ -33,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 // 회원 관리 처리 API 전부를 login 없이 허용
-                .antMatchers("/user/**").permitAll()
+//                .antMatchers("/user/**").permitAll()
 //                .anyRequest().permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -55,8 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/user/logout")
                 .permitAll()
                 .and()
-                .exceptionHandling()
+                .exceptionHandling();
 // "접근 불가" 페이지 URL 설정
-                .accessDeniedPage("/forbidden.html");
+//                .accessDeniedPage("/forbidden.html");
     }
 }

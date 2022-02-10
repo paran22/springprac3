@@ -3,6 +3,7 @@ package com.sparta.week03project.service;
 import com.sparta.week03project.dto.OrderDto;
 import com.sparta.week03project.dto.OrderResponseDto;
 import com.sparta.week03project.entity.*;
+import com.sparta.week03project.exception.CustomException;
 import com.sparta.week03project.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.sparta.week03project.exception.ErrorCode.*;
 
 @Service
 public class OrderService {
@@ -31,7 +34,7 @@ public class OrderService {
     public OrderResponseDto addOrder(OrderDto orderDto) {
         //주문 식당 찾기
         Restaurant restaurant = restaurantRepository.findById(orderDto.getRestaurantId())
-                .orElseThrow(() -> new NullPointerException("해당 음식점이 존재하지 않습니다."));
+                .orElseThrow(() -> new CustomException(RESTAURANT_NOT_FOUND));
 
         // OrderFood 생성 및 저장
         List<OrderFood> orderFoodList = saveOrderFood(orderDto);
@@ -55,7 +58,7 @@ public class OrderService {
         }
         //주문최소가격 유효성검사
         if (sumPrice < restaurant.getMinOrderPrice()) {
-            throw new IllegalArgumentException("주문 금액이 최소 주문 가격을 넘지 않습니다.");
+            throw new CustomException(INVALID_ORDER_PRICE);
         }
         Long deliveryFee = restaurant.getDeliveryFee();
         //거리 1당 500원씩 배달비 할증 추가
@@ -81,7 +84,7 @@ public class OrderService {
     // 주문 음식을 Food에서 찾아서 필요한 정보들을 OrderFood에 입력해주는 메소드
     private OrderFood createOrderFood(OrderDto.Foods foods) {
         Food food = foodRepository.findById(foods.getId())
-                .orElseThrow(() -> new NullPointerException("해당 음식이 존재하지 않습니다."));
+                .orElseThrow(() -> new CustomException(FOOD_NOT_FOUND));
         return new OrderFood(
                 food.getName(), foods.getQuantity(), food.getPrice());
     }
